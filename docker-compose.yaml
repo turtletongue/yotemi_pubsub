@@ -6,7 +6,7 @@ services:
     container_name: yotemi_pubsub
     restart: unless-stopped
     tty: true
-    entrypoint: redis-server /usr/local/etc/redis/redis.conf --requirepass $REDIS_PASSWORD
+    entrypoint: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
     env_file:
       - .env
     ports:
