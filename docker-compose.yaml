@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  pubsub:
+    image: redis:7.0.7-alpine3.17
+    container_name: yotemi_pubsub
+    restart: unless-stopped
+    tty: true
+    entrypoint: redis-server /usr/local/etc/redis/redis.conf --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
